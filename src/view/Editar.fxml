@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="405.0" prefWidth="375.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="control.EditarController">
+   <children>
+      <ImageView fx:id="imagem" fitHeight="100.0" fitWidth="100.0" layoutX="137.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true" />
+      <Button layoutX="139.0" layoutY="152.0" mnemonicParsing="false" onAction="#trocarImagem" text="Trocar Imagem" />
+      <TextField fx:id="textLogin" layoutX="113.0" layoutY="212.0" promptText="Login" />
+      <PasswordField fx:id="textSenha" layoutX="113.0" layoutY="248.0" promptText="Senha" />
+      <PasswordField fx:id="textSenha1" layoutX="113.0" layoutY="284.0" promptText="Confirme a Senha" />
+      <TextField fx:id="textEmail" layoutX="113.0" layoutY="318.0" promptText="Email" />
+      <Button layoutX="195.0" layoutY="357.0" mnemonicParsing="false" onAction="#alterar" text="Alterar" />
+      <Button layoutX="127.0" layoutY="357.0" mnemonicParsing="false" onAction="#voltar" text="Voltar" />
+   </children>
+</AnchorPane>

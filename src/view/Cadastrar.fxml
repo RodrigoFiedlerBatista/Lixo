@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="350.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="control.CadastrarController">
+   <children>
+      <TextField fx:id="textLogin" layoutX="95.0" layoutY="158.0" promptText="Login" />
+      <PasswordField fx:id="textSenha" layoutX="95.0" layoutY="192.0" promptText="Senha" />
+      <TextField fx:id="textEmail" layoutX="95.0" layoutY="224.0" promptText="Email" />
+      <Button layoutX="104.0" layoutY="285.0" mnemonicParsing="false" onAction="#cadastrar" text="Cadastrar" />
+      <Button layoutX="198.0" layoutY="285.0" mnemonicParsing="false" onAction="#voltar" text="Voltar" />
+      <Label fx:id="labelLogin" layoutX="250.0" layoutY="163.0" text="*" textFill="RED" visible="false" />
+      <Label fx:id="labelSenha" layoutX="249.0" layoutY="198.0" text="*" textFill="RED" visible="false" />
+      <Label fx:id="labelEmail" layoutX="250.0" layoutY="229.0" text="*" textFill="RED" visible="false" />
+      <Label fx:id="labelErro" layoutX="96.0" layoutY="259.0" prefHeight="17.0" prefWidth="149.0" text="Preencha todos os campos" visible="false" />
+      <ImageView fx:id="imagem" fitHeight="100.0" fitWidth="100.0" layoutX="120.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/user.png" />
+         </image></ImageView>
+      <Label layoutX="127.0" layoutY="10.0" text="Cadastro">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Button layoutX="244.0" layoutY="89.0" mnemonicParsing="false" onAction="#trocarImagem" text="Trocar Imagem" />
+   </children>
+</AnchorPane>

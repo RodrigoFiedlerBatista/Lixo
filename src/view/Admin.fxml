@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="control.AdminController">
+   <children>
+      <Accordion prefHeight="480.0" prefWidth="640.0">
+        <panes>
+          <TitledPane animated="false" text="Usuários">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="tabelaUsuario" prefHeight="365.0" prefWidth="640.0">
+                          <columns>
+                            <TableColumn fx:id="colId" prefWidth="75.0" text="ID" />
+                            <TableColumn fx:id="colLogin" prefWidth="138.0" text="Login" />
+                              <TableColumn fx:id="colEmail" prefWidth="153.0" text="Email" />
+                              <TableColumn fx:id="colImagem" prefWidth="272.0" text="Imagem" />
+                          </columns>
+                        </TableView>
+                        <Button layoutX="90.0" layoutY="371.0" mnemonicParsing="false" onAction="#pdfUsuario" text="PDF Usuários" />
+                        <Button layoutX="223.0" layoutY="371.0" mnemonicParsing="false" onAction="#editarUsuario" text="Editar Usuário" />
+                        <Button layoutX="362.0" layoutY="371.0" mnemonicParsing="false" onAction="#deletaUsuario" text="Deletar Usuário" />
+                        <Button layoutX="501.0" layoutY="371.0" mnemonicParsing="false" onAction="#voltar" text="Voltar" />
+                     </children></AnchorPane>
+            </content>
+          </TitledPane>
+          <TitledPane animated="false" text="untitled 3">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </TitledPane>
+          <TitledPane animated="false" text="untitled 2">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </TitledPane>
+        </panes>
+      </Accordion>
+   </children>
+</AnchorPane>

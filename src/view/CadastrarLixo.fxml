@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="221.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="control.CadastrarLixoController">
+   <children>
+      <Label layoutX="155.0" layoutY="27.0" text="Lixo">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+      <TextField fx:id="textQuantidade" layoutX="101.0" layoutY="121.0" promptText="Quantidade" />
+      <Button layoutX="142.0" layoutY="166.0" mnemonicParsing="false" onAction="#addLixo" text="Adicionar" />
+      <ComboBox fx:id="comboTipo" layoutX="100.0" layoutY="76.0" prefWidth="150.0" />
+   </children>
+</AnchorPane>
