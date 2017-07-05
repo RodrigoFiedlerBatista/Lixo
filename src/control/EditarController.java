@@ -25,6 +25,7 @@ import model.Usuario;
 import model.jdbc.UsuarioDAO;
 import view.manage.Admin;
 import view.manage.Editar;
+import view.manage.Home;
 
 public class EditarController implements Initializable {
     
@@ -45,11 +46,18 @@ public class EditarController implements Initializable {
     
     private static Usuario usuario;
     
+    private static String urlImagem = System.getProperty("user.dir") + "\\src\\imagens\\user.png";
+    
+    private static String urlAntiga;
+    
+    private static boolean adminL;
     
     @FXML
     void trocarImagem(ActionEvent event) {
         GerenciaImagem gerenciaImagem = new GerenciaImagem();
-        usuario.setImagem(gerenciaImagem.getNovaImagem());
+        urlAntiga = usuario.getImagem();
+        urlImagem = gerenciaImagem.getNovaImagem();
+        usuario.setImagem(urlImagem);
         
         atualizaImagem();
     }
@@ -64,11 +72,13 @@ public class EditarController implements Initializable {
         }
     }
     
-    public boolean validaLogin(){
+    public boolean validaLogin(Usuario usuario){
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         Usuario.setUsuarios(usuarioDAO.selectUsuario());
         for (int i = 0; i < Usuario.getUsuarios().size(); i++) {
-            if (Usuario.getUsuarios().get(i).getLogin().equals(textLogin.getText())) {
+            if (textLogin.getText().equals(usuario.getLogin())) {
+                return false;
+            } else if (Usuario.getUsuarios().get(i).getLogin().equals(textLogin.getText())) {
                 return true;   
             }
         }
@@ -91,7 +101,7 @@ public class EditarController implements Initializable {
             alerta.setContentText("Digite um email valido!");
             alerta.show();
             
-        } else if (validaLogin()){
+        } else if (validaLogin(usuario)){
             Alert alerta = new Alert(AlertType.ERROR);
             alerta.setTitle("Erro");
             alerta.setHeaderText("Login Invalido!");
@@ -101,7 +111,30 @@ public class EditarController implements Initializable {
         } else {
             Criptografia criptografia = new Criptografia();
             UsuarioDAO usuarioDAO = new UsuarioDAO();
-            Path deleta = Paths.get(System.getProperty("user.dir") + "\\src\\imagens\\" + usuario.getLogin() + ".png");
+            
+            
+            usuario.setLogin(textLogin.getText());
+            usuario.setEmail(textEmail.getText());
+            usuario.setChave(criptografia.genKey(textSenha.getText().length()));
+            usuario.setSenha(criptografia.criptografa(textSenha.getText(), usuario.getChave()));
+            usuario.setImagem(urlImagem);
+            usuarioDAO.atualiza(usuario);
+            
+            if (usuario.getImagem().equals(urlAntiga)) {
+                System.out.println("blz");
+            } else {
+                Path source = Paths.get(usuario.getImagem());
+            urlImagem = System.getProperty("user.dir") + "\\src\\imagens\\" + textLogin.getText() + ".png";
+            Path dest = Paths.get(urlImagem);
+            try {
+                Files.copy(source, dest);
+            } catch (IOException ex) {
+                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            
+            
+            Path deleta = Paths.get(urlAntiga);
             Path user = Paths.get(System.getProperty("user.dir") + "\\src\\imagens\\user.png");
             if (deleta.equals(user)) {
                 System.out.println("Não deletou");
@@ -112,21 +145,8 @@ public class EditarController implements Initializable {
                     Logger.getLogger(EditarController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            
-            usuario.setLogin(textLogin.getText());
-            usuario.setEmail(textEmail.getText());
-            usuario.setChave(criptografia.genKey(textSenha.getText().length()));
-            usuario.setSenha(criptografia.criptografa(textSenha.getText(), usuario.getChave()));
-            String urlImagem = usuario.getImagem();
-            Path source = Paths.get(usuario.getImagem());
-            urlImagem = System.getProperty("user.dir") + "\\src\\imagens\\" + textLogin.getText() + ".png";
-            Path dest = Paths.get(urlImagem);
-            try {
-                Files.copy(source, dest);
-            } catch (IOException ex) {
-                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            usuarioDAO.atualiza(usuario);
+            
             
             
             Editar editar = new Editar();
@@ -159,13 +179,28 @@ public class EditarController implements Initializable {
     public static void setUsuario(Usuario usuario) {
         EditarController.usuario = usuario;
     }
+
+    public static boolean isAdminL() {
+        return adminL;
+    }
+
+    public static void setAdminL(boolean adminL) {
+        EditarController.adminL = adminL;
+    }
     
     @FXML
     void voltar(ActionEvent event) {
         Editar editar = new Editar();
         Admin admin = new Admin();
-        editar.fechaEditar();
-        admin.iniciaAdmin();
+        Home home = new Home();
+        if (adminL == true ) {
+            editar.fechaEditar();
+            admin.iniciaAdmin();
+        } else {
+            home.iniciaHome();
+            editar.fechaEditar();
+        }
+        
     }
     
 }

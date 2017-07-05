@@ -1,6 +1,5 @@
 package model;
 
-import control.CadastrarLixoController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.XYChart;
@@ -17,40 +16,37 @@ public class GraficoBarra {
         LixoDAO lixoDAO = new LixoDAO();
         Lixo.setLixo(lixoDAO.selectLixo());
         
-        
+        int contadorMetal = 0;
+        int contadorPapel = 0;
+        int contadorPlastico = 0;
+        int contadorVidro = 0;
+        int contadorOutro = 0;
         
         for (int i = 0; i < Lixo.getLixo().size(); i++) {
             
             if (Lixo.getLixo().get(i).getId_usuario() == usuario.getId_usuario()) {
                 
                 if (Lixo.getLixo().get(i).getTipo().equals("Metal")) {
-                    dados.add(new XYChart.Data("Metal", Lixo.getLixo().get(i).getQuantidade()));
+                    contadorMetal = contadorMetal + Lixo.getLixo().get(i).getQuantidade();
+                } else if(Lixo.getLixo().get(i).getTipo().equals("Papel")) {
+                    contadorPapel = contadorPapel + Lixo.getLixo().get(i).getQuantidade();
+                } else if (Lixo.getLixo().get(i).getTipo().equals("Plastico")) {
+                    contadorPlastico = contadorPlastico + Lixo.getLixo().get(i).getQuantidade();
+                } else if (Lixo.getLixo().get(i).getTipo().equals("Vidro")) {
+                    contadorVidro = contadorVidro + Lixo.getLixo().get(i).getQuantidade();
+                } else if (Lixo.getLixo().get(i).getTipo().equals("Outro")) {
+                    contadorOutro = contadorOutro + Lixo.getLixo().get(i).getQuantidade();
                 }
                 
-                
             }
-            
             
         }
         
-        
-        /*for (int i = 0; i < MesDAO.getMeses().size(); i++) {
-            
-            int totalPorMes = 0;
-            
-            for (int j = 0; j < VendaDAO.getVendas().size(); j++) {
-                
-                if (MesDAO.getMeses().get(i).equals(VendaDAO.getVendas().get(j).getMes())) {
-                    totalPorMes++;
-                }
-                
-            }
-            if (totalPorMes > 0) {
-                dados.add(new XYChart.Data(MesDAO.getMeses().get(i), totalPorMes));
-            }
-            
-            
-        }*/
+        dados.add(new XYChart.Data("Metal", contadorMetal));
+        dados.add(new XYChart.Data("Plastico", contadorPlastico));
+        dados.add(new XYChart.Data("Papel", contadorPapel));
+        dados.add(new XYChart.Data("Vidro", contadorVidro));
+        dados.add(new XYChart.Data("Outro", contadorOutro));
         
         grafico.setData(dados);
         return grafico;

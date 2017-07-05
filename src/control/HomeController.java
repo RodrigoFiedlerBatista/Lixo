@@ -11,7 +11,9 @@ import javafx.scene.image.ImageView;
 import model.GraficoBarra;
 import model.Usuario;
 import view.manage.CadastrarLixo;
+import view.manage.Editar;
 import view.manage.Home;
+import view.manage.Login;
 
 public class HomeController implements Initializable {
     
@@ -25,7 +27,12 @@ public class HomeController implements Initializable {
 
     @FXML
     void editar(ActionEvent event) {
-
+        EditarController.setUsuario(usuario);
+        EditarController.setAdminL(false);
+        Editar editar = new Editar();
+        Home home = new Home();
+        editar.iniciaEditar();
+        home.fechaHome();
     }
 
     @FXML
@@ -60,9 +67,18 @@ public class HomeController implements Initializable {
         HomeController.usuario = usuario;
     }
     
+    @FXML
+    void voltar(ActionEvent event) {
+        Login login = new Login();
+        Home home = new Home();
+        home.fechaHome();
+        login.iniciaLogin();
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         atualizaImagem();
+        carregaBarChart();
     }    
     
 }

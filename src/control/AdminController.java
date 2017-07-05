@@ -13,6 +13,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TableColumn;
@@ -43,6 +44,9 @@ public class AdminController implements Initializable {
 
     @FXML
     private TableColumn<Usuario, String> colLogin;
+    
+    @FXML
+    private PieChart pieChart;
     
     private static Usuario usuario;
     
@@ -109,6 +113,7 @@ public class AdminController implements Initializable {
     @FXML
     void editarUsuario(ActionEvent event) {
         EditarController.setUsuario(usuario);
+        EditarController.setAdminL(true);
         Editar editar = new Editar();
         Admin admin = new Admin();
         editar.iniciaEditar();

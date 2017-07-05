@@ -30,7 +30,16 @@ public class UsuarioDAO {
     
     public void deletaUsuario(int id_usuario){
         String sql = "delete from usuario where id_usuario = ?";
+        String sql2 = "delete from lixo where id_usuario = ?";
         ConnectionFactory con = new ConnectionFactory();
+        
+        try {
+            PreparedStatement stmt = con.getConnection().prepareStatement(sql2);
+            stmt.setInt(1, id_usuario);
+            stmt.execute();
+        } catch (Exception e) {
+            System.out.println("Errou");
+        }
         
         try {
             PreparedStatement stmt = con.getConnection().prepareStatement(sql);
